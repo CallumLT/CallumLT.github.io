@@ -2,6 +2,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+    <link rel="stylesheet" type="text/css" href="styles.css">
         .btn {
             border: none;
             color: white;
@@ -32,14 +33,13 @@
 <body>
 
 
-<a href="Home.html" class="btn success">About Me</a>
+<a href="index.html" class="btn success">About Me</a>
 <a href="opinion.html" class="btn info">Opinion of BHS</a>
 <a href="game.html" class="btn warning">My Games</a>
 <a href="map2.html" class="btn danger" >Map</a>
 <a href="game2.html" class="btn clear">Game 2</a>
-<br>
-<br>
 
+<div id="game"></div>
         </body>
 
 <script>
@@ -48,6 +48,7 @@
     var myLevel;
     var myObstacles = [];
     var myScore;
+
 
     function startGame() {
         myLevel = new component("20px", "Cursive", "black", 100, 40, "text");
@@ -79,7 +80,7 @@
             this.canvas.width = 480;
             this.canvas.height = 270;
             this.context = this.canvas.getContext("2d");
-            document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+            document.getElementById("game").appendChild(this.canvas)
             this.frameNo = 0;
             this.interval = setInterval(updateGameArea, 20);
         },
