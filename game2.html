@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .btn {
+            border: none;
+            color: white;
+            padding: 18px 28px;
+            font-size: 50px;
+            cursor: pointer;
+        }
+
+
+
+        .success {background-color: #4CAF50;} /* Green */
+        .success:hover {background-color: #46a049;}
+
+        .info {background-color: #2196F3;} /* Blue */
+        .info:hover {background: #0b7dda;}
+
+        .warning {background-color: #ff9800;} /* Orange */
+        .warning:hover {background: #e68a00;}
+
+        .danger {background-color: #f44336;} /* Red */
+        .danger:hover {background: #da190b;}
+
+        .clear {background-color: #483D8B;}
+        .clear:hover {background: #8B008B;}
+
+
+        body{background-color:violet}
+
+
+    </style>
+</head>
+<body>
+
+
+<a href="Home.html" class="btn success">About Me</a>
+<a href="opinion.html" class="btn info">Opinion of BHS</a>
+<a href="game.html" class="btn warning">My Games</a>
+<a href="map2.html" class="btn danger" >Map</a>
+<a href="game2.html" class="btn clear">Game 2</a>
+
+</body>
+
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Word Guesser</title>
+</head>
+<body>
+
+<div id="guess_display"></div>
+
+
+<form id="guess_form">
+    <label>Guess a letter:
+        <input type="text" id="guess_input">
+    </label>
+</form>
+
+<div id="guess_status"></div>
+
+<script>
+
+    var guessForm = document.getElementById("guess_form");
+    var guessDisplay = document.getElementById("guess_display");
+    var guessInput = document.getElementById("guess_input");
+    var guessStatus = document.getElementById("guess_status");
+
+    var secretWord = "banana";
+    var guessedWord = [];
+    var guessedLetters = [];
+    for (var i = 0; i < secretWord.length; i++) {
+        guessedWord[i] = "_";
+    }
+
+    var checkLetterGuess = function(letter) {
+        var foundLetter = false
+        guessedLetters.push(letter)
+        for (i = 0; i < secretWord.length; i++){
+            if (secretWord[i] === letter ){
+                guessedWord[i] = letter
+                foundLetter = true
+            }
+        }
+        return foundLetter
+    };
+
+    var hasWon = function() {
+        if (secretWord === guessedWord.join("")){
+            return true
+        }
+    };
+
+
+    var displayGuessedWord = function() {
+        guessDisplay.innerHTML = guessedWord.join(" ");
+    };
+
+
+    guessForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        var foundLetter = checkLetterGuess(guessInput.value);
+        if (foundLetter) {
+            guessStatus.innerHTML = "Yay you found one!";
+        } else {
+            guessStatus.innerHTML = "Sorry, not so much!";
+        }
+        if (hasWon()) {
+            guessStatus.innerHTML += "WOOO WINNER WINNER!";
+        }
+        displayGuessedWord();
+        guessInput.value = "";
+    });
+    displayGuessedWord();
+
+
+</script>
+<h1 style="font-size:30px; font-family:cursive">I made this game with Kyle and Louis. It took us three days but we managed.</h1>
+</body>
+</html>
