@@ -11,22 +11,26 @@
         }
 
     .home {background-color: aquamarine;}
-    .home:hover {background-color: aquamarine;}
+    .home:hover {background-color: black;}
 
-        .success {background-color: #4CAF50;} /* Green */
-        .success:hover {background-color: #46a049;}
+        .success {background-color: #4CAF50;}
+        .success:hover {background-color: black;}
 
-        .info {background-color: #2196F3;} /* Blue */
-        .info:hover {background: #0b7dda;}
+        .info {background-color: #2196F3;}
+        .info:hover {background: black;}
 
-        .warning {background-color: #ff9800;} /* Orange */
-        .warning:hover {background: #e68a00;}
+        .warning {background-color: orange;}
+        .warning:hover {background: black;}
 
-        .danger {background-color: black;} /* Red */
-        .danger:hover {background: #da190b;}
+        .danger {background-color: black;}
+        .danger:hover {background: black;}
 
         .clear {background-color: violet;}
-        .clear:hover {background: blueviolet}
+        .clear:hover {background: black;}
+
+        .yes {background-color: hotpink;}
+        .yes:hover {background: black}
+
 
 
         body{background-color:red}
@@ -36,37 +40,109 @@
 </head>
 <body>
 
-<a href="map.html" class="btn home">Home Page</a>
-<a href="index.html" class="btn success">About Me</a>
-<a href="opinion.html" class="btn info">Opinion of BHS</a>
-<a href="game.html" class="btn warning">My Games</a>
-<a href="map2.html" class="btn danger" >Map</a>
-<a href="game2.html" class="btn clear">Game 2</a>
+<a href="map.html" class="btn home">Home Page!</a>
+<a href="index.html" class="btn success">About Me!</a>
+<a href="opinion.html" class="btn info">My Quiz!</a>
+<a href="game.html" class="btn warning">Game #1!</a>
+<a href="map2.html" class="btn danger" >Map!</a>
+<a href="game2.html" class="btn clear">Game #2!</a>
+<a href="shattuck.html" class="btn yes">Geo Guesser!</a>
 
 </body>
 
 
 <!DOCTYPE html>
 <html>
+<head>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+    </style>
+</head>
 <body>
 
-<h1>W3school's Google Map!</h1>
-
-<div id="map" style="width:400px;height:400px;background:yellow"></div>
+<h1 style="font-family:cursive;font-size:50px;color:black"><marquee>Five Places I've visited with stories</marquee></h1>
+<div id="map"></div>
 
 <script>
-    function myMap() {
-        var mapOptions = {
-            center: new google.maps.LatLng(37.868, -122.2715),
-            zoom: 7,
-            mapTypeId: google.maps.MapTypeId.HYBRID
-        }
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    function initMap() {
+        var mapDiv = document.getElementById('map');
+
+        var map = new google.maps.Map(mapDiv, {
+            zoom: 1.7,
+            center: {lat:30, lng: 0},
+            gestureHandling: 'greedy'
+        });
+
+        var marker1 = new google.maps.Marker({
+            position: {lat:53.845721, lng: -8.192126},
+            map: map
+        });
+        var marker2 = new google.maps.Marker({
+            position: {lat:-33.932745, lng: 18.445572},
+            map: map
+        });
+        var marker3 = new google.maps.Marker({
+            position: {lat:9.411135, lng:-84.151854},
+            map: map
+        });
+        var marker4 = new google.maps.Marker({
+            position: {lat:19.821935, lng: -155.470242},
+            map: map
+        });
+        var marker5 = new google.maps.Marker({
+            position: {lat:-37.069115, lng: 149.899809},
+            map: map
+        });
+        var info1 = new google.maps.InfoWindow({
+            content: '<marquee>Elphin</marquee>'
+        });
+        var info2 = new google.maps.InfoWindow({
+            content: '<marquee>Cape Town</marquee>'
+        });
+        var info3 = new google.maps.InfoWindow({
+            content: '<marquee>Manuel Antonio</marquee>'
+        });
+        var info4 = new google.maps.InfoWindow({
+            content: '<marquee>Mauna Kea</marquee>'
+        });
+        var info5 = new google.maps.InfoWindow({
+            content: '<marquee>Eden</marquee>'
+        });
+        marker1.addListener('click', function() {
+            info1.open(map, marker1);
+        });
+        marker2.addListener('click', function() {
+            info2.open(map, marker2);
+        });
+        marker3.addListener('click', function() {
+            info3.open(map, marker3);
+        });
+        marker4.addListener('click', function() {
+            info4.open(map, marker4);
+        })
+        marker5.addListener('click', function() {
+            info5.open(map, marker5);
+        })
     }
 </script>
+<h3 style="color:blue;">1: Elphin, Ireland</h3>
+<p style="color:black;">When I was six years old my family and I visited Elphin, in North Ireland. One day we drove off to the outskirts of the town, and we found a turkey. Me, being my normal self, ran up to the turkey and tried to pet it, but in response it bit me. Now I can tell people I got bit by a turkey...</p>
+<h3 style="color:blue;">2: Cape Town, South Africa</h3>
+<p style="color:black;">Only a year after I got bit by a Turkey in Ireland, I went to Cape town, at the caped of South Africa. My family and I went to a famous beach. The reason this beach is so famous is because the wooden steps that lead down to the sand have penguins under them. Me, again being my normal self, tried petting a penguin. The mother penguin thought I was going to harm her children, so she bit me. Now I can tell people I also got bit by a penguin...</p>
+<h3 style="color:blue;">3: Manuel Antonio, Costa Rica</h3>
+<p style="color:black;">Ok, so this story is a bit more serious. The marker I have down on Costa Rica is of the house I stayed in, not the exact spot in the rainforest where this next series of events happened. Two years ago my family and I visited the Manuel Antonio rainforest in west Costa Rica. We were warned that this forest holds many dangerous animals and insects, so we dressed well. We had a tour guide who walked us through the rainforest on this wood bridge. We walked through it and the path lead to a beach, we spent some time at the beach then decided to go back. On our walk back it started pouring rain, and when I mean pouring I mean POURING. We started running back to the car, and once in the car I look down at my pants. An enormouse bullet and is hanging out on the side of the denym jeans. I jump out of the car and shook it off. Lucky for me it didn't bite me, for that is the most painful insect bite you can get, and it wouldn't even compare to the penguin or the turkey.
+<h3 style="color:blue;">4: Mauna Kea, Hawaii</h3>
+<p style="color:black;">This story is possibly one of the scariest experiences I've ever experienced. My family and I were in Hawaii (the big island) and we knew that our trip wouldn't be completed if we didn't visit a volcano. We drove three hours and finally got to Mauna Kea. Once we arrived there, we had the opportunity, for $70, to have a tour inside of the huge crater at the top. We knew that we had to do this. We bought tickets and started walking down a large path that lead into the enormous crater. Right as we started our descent it started raining, which was expected, and noone minded since it just added beauty to the already beautiful scenery. One hour into the trip we were far into the crater, and we heard a huge thunder sound in the distance. We knew we had to find cover, so we started running to a small cave we saw in the distance. Keep in mind, it was pouring so hard we could barely look up without a gallon of water pouring on our faces. Right as we approached the cave the loudest sound I've ever heard came out of nowhere and everything turned white. At this point my heart was racing as I looked around to see everyone was doing the same. We kept running and finally reached the cave and waited the storm out.</p>
+<h3 style="color:blue;">5: Eden, Australia</h3>
+<p style="color:black;">This story is less exciting than the others, but is still the most exciting story I have for somewhere in this part of the world. My family and I went to Australia for the winter, since we wanted to avoid the frigid weather in Amsterdam. We stayed in Eden, a small town on the coast of East Australia. One day we were at the beach, and everyone knows that Australia has the most exotic/dangerous animals, but what I saw was not exotic at all. I was swimming in somewhat shallow and very clear water. Although I couldn't touch the ground I could still see it about seven feet under me. I was enjoying all of the beautiful kelp forests and algea until I saw a small shark swimming to my left at the bottom. I immediatly turned around and sprinted back to shore, which was still very close. For my whole time in Australia after that I avoided deep water like that.<p>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
-<p> This is where Berkeley High School is. Hold the command button and scroll up/down to zoom in and out! (coordinates are 37.868, -122.2715, I spent too much time finding that...) </p>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrSAqX0DuI-ZA3xrvnSZ_atK5GvXFelQQ&callback=initMap">
+    </script>
 
 </body>
 </html>

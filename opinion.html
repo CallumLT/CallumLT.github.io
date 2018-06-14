@@ -11,44 +11,153 @@
         }
 
     .home {background-color: aquamarine;}
-    .home:hover {background-color: aquamarine;}
+    .home:hover {background-color: black;}
 
-        .success {background-color: #4CAF50;} /* Green */
-        .success:hover {background-color: #46a049;}
+        .success {background-color: #4CAF50;}
+        .success:hover {background-color: black;}
 
-        .info {background-color: black;} /* Blue */
-        .info:hover {background: #0b7dda;}
+        .info {background-color: black;}
+        .info:hover {background: black;}
 
-        .warning {background-color: #ff9800;} /* Orange */
-        .warning:hover {background: #e68a00;}
+        .warning {background-color: #ff9800;}
+        .warning:hover {background: black;}
 
-        .danger {background-color: #f44336;} /* Red */
-        .danger:hover {background: #da190b;}
+        .danger {background-color: #f44336;}
+        .danger:hover {background: black;}
 
         .clear {background-color: violet;}
-        .clear:hover {background: blueviolet}
+        .clear:hover {background: black}
+
+        .yes {background-color: hotpink;}
+        .yes:hover {background: black}
 
 
-        body{background-color:blue}
 
+        body{background-color:lightblue}
+        </head>
+        </style>
 
-    </style>
-</head>
+    <a href="map.html" class="btn home">Home Page!</a>
+    <a href="index.html" class="btn success">About Me!</a>
+    <a href="opinion.html" class="btn info">My Quiz!</a>
+    <a href="game.html" class="btn warning">Game #1!</a>
+    <a href="map2.html" class="btn danger" >Map!</a>
+    <a href="game2.html" class="btn clear">Game #2!</a>
+    <a href="shattuck.html" class="btn yes">Geo Guesser!</a>
+
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Exciting Quiz Time!</title>
+    </head>
 <body>
 
-<a href="map.html" class="btn home">Home Page</a>
-<a href="index.html" class="btn success">About Me</a>
-<a href="opinion.html" class="btn info">Opinion of BHS</a>
-<a href="game.html" class="btn warning">My Games</a>
-<a href="map2.html" class="btn danger" >Map</a>
-<a href="game2.html" class="btn clear">Game 2</a>
+<h3>Exciting Quiz Time!</h3>
+
+<form id="quiz-form">
+
+    <label>
+        Your name:
+        <input id="player" type="text">
+    </label>
+
+    <fieldset>
+        <legend>What is the most populated city in the world?</legend>
+        <label><input name="question1" value="java" type="radio">Delhi, India</label><br>
+        <label><input name="question1" value="python" type="radio">Shanghai, China</label><br>
+        <label><input name="question1" value="javascript" type="radio">Tokyo, Japan</label><br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Who created JavaScript?</legend>
+        <label><input name="question2" value="puffin" type="radio">Brendan Eich</label><br>
+        <label><input name="question2" value="poppy" type="radio">John Resig</label><br>
+        <label><input name="question2" value="purple" type="radio">James Gostling</label><br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Where is San Juan the capital of?</legend>
+        <label><input name="question3" value="Costa Rica" type="radio">Costa Rica</label><br>
+        <label><input name="question3" value="Brazil" type="radio">Brazil</label><br>
+        <label><input name="question3" value="Chile" type="radio">Chile</label><br>
+    </fieldset>
 
 
-<p style="font-size: 30px;font-family: Cursive; color:red">I believe that Berkeley High School is a very diverse and opinionated school. Although some may concider this a negative aspect,
-    I believe that it is what builds a community between the students. Students actually have a voice, and have enough power to make the whole school noticed during walkouts. I'm a
-sophemore at BHS and I've already been on three walkouts, and each one was on the news. This school actually cares about issues surrounding us and is not scared to show it.</p>
+    <button type="submit">Check me</button>
+</form>
+
+<div id="results"></div>
+
+<script>
+    var quizForm = document.getElementById("quiz-form");
+    quizForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        var resultsDiv = document.getElementById("results");
+
+        var score = 0;
+
+        var answer1 = document.querySelector('[name="question1"]:checked');
+        if (answer1 && answer1.value === "javascript") {
+            score += 50;
+        }
+        var answer2 = document.querySelector('[name="question2"]:checked');
+        if (answer2 && answer2.value === "poppy") {
+            score += 50;
+        }
+        var answer3 = document.querySelector('[name="question3"]:checked');
+        if (answer3 && answer3.value === "Costa Rica") {
+            score += 50;
+        }
 
 
-<img src="../../Desktop/download.jpg"/>
-<img src="../../Desktop/Screen Shot 2018-03-29 at 2.07.51 PM.png"/><img src="../../Desktop/images.jpg"/><img
-        src="../../Desktop/images-1.jpg"/></body>
+        if (score >= 150) {
+            resultsDiv.innerHTML = "you got it all right!";
+        } else {
+            resultsDiv.innerHTML = "you got " + score + "%";
+        }
+
+    });
+
+    function getScores() {
+        var request = new XMLHttpRequest();
+        request.addEventListener('load', function () {
+            var scores = JSON.parse(this.responseText);
+            var scoresDiv = document.getElementById('scores');
+            scoresDiv.innerHTML = '';
+            for (var i = 0; i < scores.length; i++) {
+                scoresDiv.innerHTML += '<li>' + scores[i].player + ': ' + scores[i].score;
+            }
+        });
+        request.open('GET', url, true);
+        request.setRequestHeader('Content-type', 'application/json');
+        request.send();
+    }
+
+    function insertScore(player, score) {
+        var url = '/scores/insert';
+
+        var request = new XMLHttpRequest();
+        request.addEventListener('load', function () {
+            if (this.status !== 200) {
+                alert('!');
+                console.log(this.response);
+            } else {
+                getScores();
+            }
+        });
+        request.open('POST', url, true);
+        request.setRequestHeader('Content-type', 'application/json');
+        var data = {'player': player, 'score': score};
+        request.send(JSON.stringify(data));
+    }
+
+    getScores()
+
+</script>
+</body>
+
+
+
+
+
